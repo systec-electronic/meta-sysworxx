@@ -1,6 +1,12 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+
 inherit systemd
 
 DEPENDS = "lmsensors libiio"
+
+SRC_URI:append = " \
+    file://0001-Cargo.toml-Remove-workspace-member-ctr700drv.patch \
+"
 
 RDEPENDS:${PN} = "lmsensors libiio"
 RDEPENDS:${PN}-codesys-connector += "${PN} sudo"
@@ -13,8 +19,6 @@ PACKAGES += " \
 # Flags are empty, no device specifics necessary
 CARGO_BUILD_FLAGS += ""
 
-# patch oe_cargo_build so that libctr700drv.so is built
-
 oe_cargo_build:append() {
     bbnote "${CARGO}" build ${CARGO_BUILD_FLAGS} --workspace "$@"
     ${CARGO} build ${CARGO_BUILD_FLAGS} --workspace "$@"
@@ -22,7 +26,6 @@ oe_cargo_build:append() {
 
 cargo_do_install() {
     install -d "${D}${libdir}"
-    install -m755 "${B}/target/${CARGO_TARGET_SUBDIR}/libctr700drv.so" "${D}${libdir}"
     install -m755 "${B}/target/${CARGO_TARGET_SUBDIR}/libsysworxx_io.so" "${D}${libdir}"
     install -m755 "${B}/target/${CARGO_TARGET_SUBDIR}/libsysworxx_io_js.so" "${D}${libdir}/libsysworxx_io_js.node"
 
@@ -32,7 +35,6 @@ cargo_do_install() {
 
     install -d ${D}${includedir}
     install -m 0644 ${S}/include/sysworxx_io.h ${D}${includedir}
-    install -m 0644 ${S}/include/ctr700drv.h ${D}${includedir}
 
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${S}/systemd/iodaemon.service ${D}${systemd_system_unitdir}
