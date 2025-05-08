@@ -1,6 +1,7 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
 export PS1='\u@\h:\w\$ '
+export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
 umask 022
 
 # You may uncomment the following lines if you want `ls' to be colorized:
