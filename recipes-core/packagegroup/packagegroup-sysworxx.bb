@@ -109,13 +109,10 @@ RDEPENDS:packagegroup-sysworxx-codesys = "\
     sysworxx-io-codesys-connector \
 "
 
-# python3-distutils is required by python3-docker-compose
-
 RDEPENDS:packagegroup-sysworxx-extended = "\
     bash-completion \
     docker-moby \
     docker-compose \
-    python3-distutils-extra \
     htop \
     mosquitto \
     mosquitto-clients \
