@@ -78,6 +78,8 @@ RDEPENDS:packagegroup-sysworxx-base = "\
     procps \
     psmisc \
     python3 \
+    python3-as-python \
+    python3-modules \
     python3-pip \
     rng-tools \
     rs485-setup \
