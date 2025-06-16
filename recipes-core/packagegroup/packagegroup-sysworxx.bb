@@ -8,7 +8,6 @@ PACKAGES = "\
     packagegroup-sysworxx \
     packagegroup-sysworxx-init \
     packagegroup-sysworxx-base \
-    packagegroup-sysworxx-codesys \
     packagegroup-sysworxx-benchmark \
     packagegroup-sysworxx-extended \
     packagegroup-sysworxx-debug \
@@ -21,7 +20,6 @@ RDEPENDS:packagegroup-sysworxx = "\
     packagegroup-sysworxx-init \
     packagegroup-sysworxx-base \
     packagegroup-sysworxx-benchmark \
-    packagegroup-sysworxx-codesys \
     packagegroup-sysworxx-extended \
     packagegroup-sysworxx-debug \
     packagegroup-sysworxx-develop \
@@ -87,6 +85,9 @@ RDEPENDS:packagegroup-sysworxx-base = "\
     sudo \
     systec-version \
     sysworxx-io \
+    sysworxx-io-codesys-connector \
+    sysworxx-io-js \
+    sysworxx-io-py \
     tar \
     time \
     tzdata \
@@ -103,10 +104,6 @@ RDEPENDS:packagegroup-sysworxx-benchmark = "\
     memtester \
     tinymembench \
     whetstone \
-"
-
-RDEPENDS:packagegroup-sysworxx-codesys = "\
-    sysworxx-io-codesys-connector \
 "
 
 RDEPENDS:packagegroup-sysworxx-extended = "\

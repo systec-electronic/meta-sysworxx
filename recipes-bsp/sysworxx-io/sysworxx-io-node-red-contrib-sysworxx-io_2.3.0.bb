@@ -10,12 +10,11 @@ inherit npm
 DEPENDS = "npm-typescript-native"
 RDEPENDS:${PN} += "${PN}"
 
+require sysworxx-io-git.inc
+S = "${WORKDIR}/git/Bindings/node-red-contrib-sysworxx-io"
 SRC_URI:append = " \
-    git://git@github.com/systec-electronic/sysworxx-io.git;protocol=https;branch=main \
     npmsw://${THISDIR}/${BPN}/npm-shrinkwrap.json;dev=1 \
 "
-SRCREV = "8fd88c8e0a3d22d9d771abe4707fe53c275cf745"
-S = "${WORKDIR}/git/Bindings/node-red-contrib-sysworxx-io"
 
 python do_configure:append() {
     import os
