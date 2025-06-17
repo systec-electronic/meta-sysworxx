@@ -1,5 +1,5 @@
 PINMUX_DIR = "${THISDIR}/../../pin-muxing/devicetree"
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.6:${PINMUX_DIR}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.12:${PINMUX_DIR}:"
 
 
 MOVE = ";subdir=git/arch/arm64/boot/dts/ti"
@@ -39,7 +39,7 @@ SRC_URI += " \
     file://k3-am625-systec-sysworxx-pi-hat-industrial-communication.dtso${MOVE} \
 "
 
-FRAGMENTS_DIR := "${THISDIR}/${PN}-6.6"
+FRAGMENTS_DIR := "${THISDIR}/${PN}-6.12"
 
 KERNEL_CONFIG_FRAGMENTS_WIFI += " \
     ${FRAGMENTS_DIR}/disable_wifi_bt.cfg \

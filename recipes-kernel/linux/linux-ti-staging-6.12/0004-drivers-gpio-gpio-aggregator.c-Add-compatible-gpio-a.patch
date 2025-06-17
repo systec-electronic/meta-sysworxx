@@ -1,10 +1,10 @@
-From bd79c519080f7104ac82d8abe0f7a3ee29300879 Mon Sep 17 00:00:00 2001
-From: des-b <desb@mail.de>
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Andreas Dinter <andreas.dinter@systec-electronic.com>
 Date: Sun, 2 Mar 2025 20:28:06 +0100
 Subject: [PATCH] drivers/gpio/gpio-aggregator.c: Add compatible
  "gpio-aggregator"
 
-Signed-off-by: des-b <desb@mail.de>
+Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
 ---
  drivers/gpio/gpio-aggregator.c | 4 ++++
  1 file changed, 4 insertions(+)
@@ -24,6 +24,6 @@ index 38e0fff9afe7..8a7c5218bfba 100644
  	{}
  };
  MODULE_DEVICE_TABLE(of, gpio_aggregator_dt_ids);
---
-2.48.1
+-- 
+2.49.0
 
