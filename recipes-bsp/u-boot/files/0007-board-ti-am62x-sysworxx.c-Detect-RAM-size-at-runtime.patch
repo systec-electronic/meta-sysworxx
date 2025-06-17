@@ -9,68 +9,87 @@ so we should be fine.
 
 Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
 ---
- board/ti/am62x/sysworxx.c | 31 +++++++++++++++++++++++--------
+ board/ti/am62x/sysworxx.c | 50 +++++++++++++++++++++++++++++++--------
  board/ti/common/Makefile  |  2 ++
- 2 files changed, 25 insertions(+), 8 deletions(-)
+ 2 files changed, 42 insertions(+), 10 deletions(-)
 
 diff --git a/board/ti/am62x/sysworxx.c b/board/ti/am62x/sysworxx.c
-index a4ac106e230..bcefa559e26 100644
+index dba5a1ece05..7698b0e1f1f 100644
 --- a/board/ti/am62x/sysworxx.c
 +++ b/board/ti/am62x/sysworxx.c
-@@ -27,6 +27,27 @@
+@@ -23,6 +23,7 @@
+ #include <asm/arch/k3-ddr.h>
+ #include <asm/gpio.h>
+ #include <linux/delay.h>
++#include <display_options.h>
  
- DECLARE_GLOBAL_DATA_PTR;
+ #include "../common/fdt_ops.h"
+ 
+@@ -84,6 +85,45 @@ void set_dfu_alt_info(char *interface, char *devstr)
+ }
+ #endif
  
 +/*
 + * RAM size is detected at runtime. Maximum RAM size is 2G.
-+ * - dram_init() is called in board_f.c/board_init_f()
-+ * - ft_board_setup() is called in image-fdt.c/image_setup_libfdt()
-+ * - bank sizes will be initialized by default implementations.
-+ *		board_init_f()
-+ *      -> dram_init_banksize()
-+ *         -> get_effective_memsize()
-+ *            -> returns gd->ram_size
++ * (this replaces defaults in board/ti/common/k3-ddr.c which read this
++ * information from DT)
++ * To test this check output during boot and/or with the `bdinfo` command.
 + */
 +
-+#define CFG_SYS_SDRAM_BASE		0x80000000
 +#define CFG_SYS_SDRAM_SIZE_MAX	SZ_2G
 +
 +int dram_init(void)
 +{
-+	gd->ram_size = get_ram_size((long *)CFG_SYS_SDRAM_BASE, CFG_SYS_SDRAM_SIZE_MAX);
-+	printf("Detected RAM size: 0x%08x\n", gd->ram_size);
-+	return 0;
++	s32 ret = 0;
++
++	ret = fdtdec_setup_mem_size_base_lowest();
++	if (ret) {
++		printf("Error setting up mem size and base. %d\n", ret);
++		return ret;
++	}
++
++	gd->ram_size = get_ram_size((long *)gd->ram_base, CFG_SYS_SDRAM_SIZE_MAX);
++	printf("Detected RAM size: ");
++	print_size(gd->ram_size, "\n");
++
++	ret = k3_mem_map_init();
++	if (ret) {
++		printf("Error setting up MMU table. %d\n", ret);
++		return ret;
++	}
++
++	return ret;
 +}
 +
- #if CONFIG_IS_ENABLED(SPLASH_SCREEN)
- static struct splash_location default_splash_locations[] = {
- 	{
-@@ -116,14 +137,6 @@ void spl_board_init(void)
- 	if (IS_ENABLED(CONFIG_SPL_SPLASH_SCREEN) && IS_ENABLED(CONFIG_SPL_BMP))
++int dram_init_banksize(void)
++{
++    gd->bd->bi_dram[0].start = (phys_addr_t) gd->ram_base;
++    gd->bd->bi_dram[0].size = (phys_size_t) gd->ram_size;
++    return 0;
++}
++
+ int board_init(void)
+ {
+ 	return 0;
+@@ -150,16 +190,6 @@ void spl_board_init(void)
  		splash_display();
+ 
  }
 -
 -void spl_perform_fixups(struct spl_image_info *spl_image)
 -{
--	if (IS_ENABLED(CONFIG_K3_DDRSS) && IS_ENABLED(CONFIG_K3_INLINE_ECC))
--		fixup_ddr_driver_for_ecc(spl_image);
--	else
+-	if (IS_ENABLED(CONFIG_K3_DDRSS)) {
+-		if (IS_ENABLED(CONFIG_K3_INLINE_ECC))
+-			fixup_ddr_driver_for_ecc(spl_image);
+-	} else {
 -		fixup_memory_node(spl_image);
+-	}
 -}
  #endif
  
  #if defined(CONFIG_OF_BOARD_SETUP)
-@@ -131,6 +144,8 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- {
- 	int ret = -1;
- 
-+	fdt_fixup_memory(blob, (u64)CFG_SYS_SDRAM_BASE, (u64)gd->ram_size);
-+
- 	if (IS_ENABLED(CONFIG_FDT_SIMPLEFB))
- 		ret = fdt_simplefb_enable_and_mem_rsv(blob);
- 
 diff --git a/board/ti/common/Makefile b/board/ti/common/Makefile
-index 070dec3aebf..5c4a5dc6d00 100644
+index caf6b9fa8c1..ae50ab7bca1 100644
 --- a/board/ti/common/Makefile
 +++ b/board/ti/common/Makefile
 @@ -4,4 +4,6 @@
@@ -78,7 +97,7 @@ index 070dec3aebf..5c4a5dc6d00 100644
  obj-${CONFIG_CMD_EXTENSION} += cape_detect.o
  obj-${CONFIG_OF_LIBFDT} += fdt_ops.o
 +ifndef CONFIG_TARGET_SYSWORXX_AM62X_ADOPT
- obj-${CONFIG_ARCH_K3} += k3-ddr-init.o
+ obj-${CONFIG_ARCH_K3} += k3-ddr.o
 +endif
 -- 
 2.50.1
