@@ -13,7 +13,7 @@ PACKAGES = "\
     packagegroup-sysworxx-debug \
     packagegroup-sysworxx-develop \
     packagegroup-sysworxx-graphical \
-    packagegroup-sysworxx-wifi \
+    packagegroup-sysworxx-wifi-bt \
 "
 
 RDEPENDS:packagegroup-sysworxx = "\
@@ -24,7 +24,7 @@ RDEPENDS:packagegroup-sysworxx = "\
     packagegroup-sysworxx-debug \
     packagegroup-sysworxx-develop \
     packagegroup-sysworxx-graphical \
-    packagegroup-sysworxx-wifi \
+    packagegroup-sysworxx-wifi-bt \
 "
 
 RDEPENDS:packagegroup-sysworxx-init = "\
@@ -40,6 +40,7 @@ RDEPENDS:packagegroup-sysworxx-base = "\
     attr \
     bash \
     bzip2 \
+    ca-certificates \
     can-setup \
     coreutils \
     cpio \
@@ -69,6 +70,8 @@ RDEPENDS:packagegroup-sysworxx-base = "\
     nano \
     ncurses \
     net-tools \
+    networkmanager \
+    networkmanager-nmcli \
     openssh-sftp \
     openssh-sftp-server \
     parted \
@@ -146,14 +149,10 @@ RDEPENDS:packagegroup-sysworxx-develop = "\
     sysworxx-io-dev \
 "
 
-RDEPENDS:packagegroup-sysworxx-wifi = "\
-    ca-certificates \
-    iw \
-    kernel-module-lwb-if-backports \
-    lwb5plus-sdio-sa-firmware \
-    summit-networkmanager-lwb-if \
-    summit-supplicant-lwb-if \
-    summit-networkmanager-lwb-if-nmcli \
-    packagegroup-tools-bluetooth \
+RDEPENDS:packagegroup-sysworxx-wifi-bt = "\
     bluez5 \
+    iw \
+    packagegroup-tools-bluetooth \
+    wpa-supplicant \
+    linux-firmware-summit-lwb5plus-sdio-sa \
 "
