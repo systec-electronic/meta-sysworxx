@@ -13,7 +13,8 @@ PACKAGES = "\
     packagegroup-sysworxx-debug \
     packagegroup-sysworxx-develop \
     packagegroup-sysworxx-graphical \
-    packagegroup-sysworxx-wifi-bt \
+    packagegroup-sysworxx-systec \
+    packagegroup-sysworxx-networking \
 "
 
 RDEPENDS:packagegroup-sysworxx = "\
@@ -24,7 +25,8 @@ RDEPENDS:packagegroup-sysworxx = "\
     packagegroup-sysworxx-debug \
     packagegroup-sysworxx-develop \
     packagegroup-sysworxx-graphical \
-    packagegroup-sysworxx-wifi-bt \
+    packagegroup-sysworxx-systec \
+    packagegroup-sysworxx-networking \
 "
 
 RDEPENDS:packagegroup-sysworxx-init = "\
@@ -36,19 +38,16 @@ RDEPENDS:packagegroup-sysworxx-init = "\
 
 RDEPENDS:packagegroup-sysworxx-base = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'rauc', 'rauc', '', d)} \
-    adc-setup \
     attr \
     bash \
+    bash-completion \
     bzip2 \
     ca-certificates \
-    can-setup \
     coreutils \
     cpio \
     cpufrequtils \
     curl \
-    di-setup \
     dosfstools \
-    dtbo-setup \
     e2fsprogs \
     e2fsprogs-mke2fs \
     e2fsprogs-resize2fs \
@@ -57,47 +56,39 @@ RDEPENDS:packagegroup-sysworxx-base = "\
     gawk \
     grep \
     gzip \
-    iperf3 \
-    iproute2 \
     kernel-modules \
     less \
     libgpiod \
     libgpiod-tools \
     makedevs \
-    mc \
-    mc-helpers \
-    mc-helpers-perl \
-    nano \
     ncurses \
-    net-tools \
-    networkmanager \
-    networkmanager-nmcli \
-    openssh-sftp \
-    openssh-sftp-server \
     parted \
-    phy-lan8830t-setup \
     procps \
     psmisc \
-    python3 \
-    python3-as-python \
-    python3-modules \
-    python3-pip \
     rng-tools \
-    rs485-setup \
     sed \
     sudo \
+    tar \
+    time \
+    tzdata \
+    usbutils \
+    util-linux \
+    util-linux-fstrim \
+"
+
+RDEPENDS:packagegroup-sysworxx-systec = "\
+    adc-setup \
+    can-setup \
+    di-setup \
+    dtbo-setup \
+    phy-lan8830t-setup \
+    rs485-setup \
     systec-version \
     sysworxx-io \
     sysworxx-io-codesys-connector \
     sysworxx-io-js \
     sysworxx-io-py \
-    tar \
-    time \
-    tzdata \
     udev-bootsource \
-    usbutils \
-    util-linux \
-    util-linux-fstrim \
     vendor-setup \
 "
 
@@ -110,27 +101,31 @@ RDEPENDS:packagegroup-sysworxx-benchmark = "\
 "
 
 RDEPENDS:packagegroup-sysworxx-extended = "\
-    bash-completion \
-    docker-moby \
     docker-compose \
+    docker-moby \
     htop \
+    mc \
+    mc-helpers \
+    mc-helpers-perl \
     mosquitto \
     mosquitto-clients \
+    nano \
     node-red \
     nodejs \
     nodejs-npm \
     openssl \
+    python3 \
+    python3-as-python \
+    python3-modules \
+    python3-pip \
     vim \
 "
 
 RDEPENDS:packagegroup-sysworxx-graphical = "\
-    kms++ \
     fb-test \
     fbv \
+    kms++ \
 "
-
-# TODO: we should probably not install the full vim experience, since this
-#       introduces gtk dependencies
 
 RDEPENDS:packagegroup-sysworxx-debug = "\
     can-utils \
@@ -139,20 +134,27 @@ RDEPENDS:packagegroup-sysworxx-debug = "\
     i2c-tools \
     lsof \
     minicom \
+    mmc-utils \
     phytool \
     strace \
     tcpdump \
-    mmc-utils \
 "
 
 RDEPENDS:packagegroup-sysworxx-develop = "\
     sysworxx-io-dev \
 "
 
-RDEPENDS:packagegroup-sysworxx-wifi-bt = "\
+RDEPENDS:packagegroup-sysworxx-networking = "\
     bluez5 \
+    iperf3 \
+    iproute2 \
     iw \
+    linux-firmware-summit-lwb5plus-sdio-sa \
+    net-tools \
+    networkmanager \
+    networkmanager-nmcli \
+    openssh-sftp \
+    openssh-sftp-server \
     packagegroup-tools-bluetooth \
     wpa-supplicant \
-    linux-firmware-summit-lwb5plus-sdio-sa \
 "
