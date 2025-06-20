@@ -14,8 +14,9 @@ SRC_URI += " \
     file://0010-board-ti-am62x-sysworxx.env-Introduce-custom-bootcom.patch \
     file://0011-board-ti-am62x-sysworxx.env-Load-restricted-environm.patch \
     file://0012-board-ti-am62x-sysworxx.env-Add-quiet-parameter-to-K.patch \
+    file://0013-ti-am62x-Enable-first-internal-watchdog-and-pass-30s.patch \
     ${@bb.utils.contains('DISTRO_FEATURES', 'rauc', \
-        'file://0013-board-ti-am62x-sysworxx.env-Implement-bootcmd-for-ra.patch', '', d)} \
+        'file://0014-board-ti-am62x-sysworxx.env-Implement-bootcmd-for-ra.patch', '', d)} \
 "
 
 UBOOT_CONFIG_FRAGMENTS:sysworxx = "am625_sysworxx_a53.config"
