@@ -19,6 +19,7 @@ SRC_URI += " \
     file://0003-drivers-thermal-k3_j72xx_bandgab.c-add-sysfs-support.patch \
     file://0004-drivers-gpio-gpio-aggregator.c-Add-compatible-gpio-a.patch \
     file://0005-Port-regdomain-setting-from-summit-backports.patch \
+    file://0006-Revert-PENDING-can-m_can-Support-pinctrl-wakeup-stat.patch \
     \
     file://k3-am623-systec-ctr600-pinmux-0.dtsi${MOVE} \
     file://k3-am623-systec-ctr800-pinmux-0.dtsi${MOVE} \
