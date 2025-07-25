@@ -70,6 +70,7 @@ RDEPENDS:packagegroup-sysworxx-base = "\
     sudo \
     tar \
     time \
+    tmux \
     tzdata \
     usbutils \
     util-linux \
