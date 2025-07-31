@@ -1,4 +1,4 @@
-From 9245b526b60510d6848f56b826252d2170125962 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Andreas Dinter <andreas.dinter@systec-electronic.com>
 Date: Thu, 1 Aug 2024 13:41:37 +0200
 Subject: [PATCH] board/ti/am62x/sysworxx.c: Reset ethernet phys during startup
@@ -8,7 +8,8 @@ Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
  arch/arm/dts/k3-am625-sk.dts         |  7 ++---
  arch/arm/dts/k3-am62x-sk-common.dtsi |  9 +++----
  board/ti/am62x/sysworxx.c            | 38 ++++++++++++++++++++++++++++
- 3 files changed, 44 insertions(+), 10 deletions(-)
+ configs/am625_sysworxx_a53.config    |  1 +
+ 4 files changed, 45 insertions(+), 10 deletions(-)
 
 diff --git a/arch/arm/dts/k3-am625-sk.dts b/arch/arm/dts/k3-am625-sk.dts
 index 7f0a58ef761..a23af5316ec 100644
@@ -57,7 +58,7 @@ index c484e7df0d5..84e7bb20e29 100644
  };
  
 diff --git a/board/ti/am62x/sysworxx.c b/board/ti/am62x/sysworxx.c
-index 3d924d6cbcd..bd916c1f392 100644
+index 3d924d6cbcd..04afb73b2ba 100644
 --- a/board/ti/am62x/sysworxx.c
 +++ b/board/ti/am62x/sysworxx.c
 @@ -19,6 +19,8 @@
@@ -69,11 +70,12 @@ index 3d924d6cbcd..bd916c1f392 100644
  
  #include "../common/board_detect.h"
  #include "../common/fdt_ops.h"
-@@ -63,6 +65,40 @@ int board_init(void)
+@@ -63,6 +65,42 @@ int board_init(void)
  }
  
  #if CONFIG_IS_ENABLED(TI_I2C_BOARD_DETECT)
 +
++#if defined(CONFIG_RESET_PHY_R)
 +void reset_eth_phy(const char* phy_rst_name) {
 +	int ret;
 +	struct gpio_desc phy_rst_desc;
@@ -100,25 +102,26 @@ index 3d924d6cbcd..bd916c1f392 100644
 +	return;
 +}
 +
-+void reset_eth_phys(void) {
++void reset_phy(void) {
 +	printf("reset ethernet PHY0\n");
 +	reset_eth_phy("gpio@601000_15");
 +	printf("reset ethernet PHY1\n");
 +	reset_eth_phy("gpio@601000_29");
 +}
++#endif
 +
  int do_board_detect(void)
  {
  	int ret;
-@@ -149,6 +185,8 @@ int board_late_init(void)
- 	}
+diff --git a/configs/am625_sysworxx_a53.config b/configs/am625_sysworxx_a53.config
+index a07a69ade7e..6af840a78c5 100644
+--- a/configs/am625_sysworxx_a53.config
++++ b/configs/am625_sysworxx_a53.config
+@@ -2,3 +2,4 @@
  
- 	ti_set_fdt_env(NULL, NULL);
-+	reset_eth_phys();
-+
- 	return 0;
- }
- #endif
+ CONFIG_TARGET_SYSWORXX_AM62X_ADOPT=y
+ CONFIG_ENV_SOURCE_FILE="sysworxx"
++CONFIG_RESET_PHY_R=y
 -- 
-2.49.0
+2.50.1
 
