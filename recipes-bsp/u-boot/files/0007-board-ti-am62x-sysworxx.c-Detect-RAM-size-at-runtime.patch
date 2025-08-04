@@ -1,4 +1,4 @@
-From b9362ec20352aa0343c26f697af44477eecc6f96 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Andreas Dinter <andreas.dinter@systec-electronic.com>
 Date: Thu, 16 Jan 2025 16:50:42 +0100
 Subject: [PATCH] board/ti/am62x/sysworxx.c: Detect RAM size at runtime
@@ -14,7 +14,7 @@ Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
  2 files changed, 25 insertions(+), 8 deletions(-)
 
 diff --git a/board/ti/am62x/sysworxx.c b/board/ti/am62x/sysworxx.c
-index a9214697b29..d0deddf879b 100644
+index a4ac106e230..bcefa559e26 100644
 --- a/board/ti/am62x/sysworxx.c
 +++ b/board/ti/am62x/sysworxx.c
 @@ -27,6 +27,27 @@
@@ -81,5 +81,5 @@ index 070dec3aebf..5c4a5dc6d00 100644
  obj-${CONFIG_ARCH_K3} += k3-ddr-init.o
 +endif
 -- 
-2.49.0
+2.50.1
 

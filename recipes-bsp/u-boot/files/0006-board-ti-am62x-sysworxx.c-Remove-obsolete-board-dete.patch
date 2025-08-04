@@ -1,6 +1,6 @@
-From 943b062cdac5ea5f090a716bf80aadd9b1556fcf Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Andreas Dinter <andreas.dinter@systec-electronic.com>
-Date: Fri, 2 Aug 2024 15:34:25 +0200
+Date: Thu, 31 Jul 2025 15:55:20 +0200
 Subject: [PATCH] board/ti/am62x/sysworxx.c: Remove obsolete board detection
 
 Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
@@ -9,7 +9,7 @@ Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
  1 file changed, 94 deletions(-)
 
 diff --git a/board/ti/am62x/sysworxx.c b/board/ti/am62x/sysworxx.c
-index bd916c1f392..a9214697b29 100644
+index 04afb73b2ba..a4ac106e230 100644
 --- a/board/ti/am62x/sysworxx.c
 +++ b/board/ti/am62x/sysworxx.c
 @@ -22,18 +22,9 @@
@@ -37,12 +37,12 @@ index bd916c1f392..a9214697b29 100644
  
 -#if CONFIG_IS_ENABLED(TI_I2C_BOARD_DETECT)
 -
+ #if defined(CONFIG_RESET_PHY_R)
  void reset_eth_phy(const char* phy_rst_name) {
  	int ret;
- 	struct gpio_desc phy_rst_desc;
-@@ -99,92 +88,9 @@ void reset_eth_phys(void) {
- 	reset_eth_phy("gpio@601000_29");
+@@ -101,92 +90,9 @@ void reset_phy(void) {
  }
+ #endif
  
 -int do_board_detect(void)
 -{
@@ -130,9 +130,9 @@ index bd916c1f392..a9214697b29 100644
 -	}
 -
 -	ti_set_fdt_env(NULL, NULL);
- 	reset_eth_phys();
- 
  	return 0;
+ }
+ #endif
 -- 
-2.49.0
+2.50.1
 

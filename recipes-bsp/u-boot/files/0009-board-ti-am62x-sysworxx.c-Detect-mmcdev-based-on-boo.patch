@@ -1,4 +1,4 @@
-From fd758093630e05b2a3d8c3ad56ac6ce63ce4fe78 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Andreas Dinter <andreas.dinter@systec-electronic.com>
 Date: Tue, 20 Aug 2024 14:32:55 +0200
 Subject: [PATCH] board/ti/am62x/sysworxx.c: Detect mmcdev based on bootmode
@@ -11,11 +11,11 @@ Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
  2 files changed, 47 insertions(+), 1 deletion(-)
 
 diff --git a/board/ti/am62x/sysworxx.c b/board/ti/am62x/sysworxx.c
-index 82fdcb23b3a..f8446785227 100644
+index 017a0a0a2fe..0a8613d8e41 100644
 --- a/board/ti/am62x/sysworxx.c
 +++ b/board/ti/am62x/sysworxx.c
-@@ -111,6 +111,51 @@ void reset_eth_phys(void) {
- }
+@@ -113,6 +113,51 @@ void reset_phy(void) {
+ #endif
  
  #if CONFIG_IS_ENABLED(BOARD_LATE_INIT)
 +
@@ -67,7 +67,7 @@ index 82fdcb23b3a..f8446785227 100644
  {
  	printf("EEPROM import\n");
 @@ -127,6 +172,8 @@ int board_late_init(void)
- 		reset_eth_phys();
+ 		}
  	}
  
 +	env_set_mmcdev();
@@ -88,5 +88,5 @@ index e677c109094..6b4eefa2a43 100644
  bootdir=/boot
  rd_spec=-
 -- 
-2.49.0
+2.50.1
 
