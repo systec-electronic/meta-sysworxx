@@ -125,7 +125,6 @@ RDEPENDS:packagegroup-sysworxx-extended = "\
 RDEPENDS:packagegroup-sysworxx-graphical = "\
     fb-test \
     fbv \
-    kms++ \
 "
 
 RDEPENDS:packagegroup-sysworxx-debug = "\
