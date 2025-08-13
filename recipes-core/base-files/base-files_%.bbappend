@@ -17,6 +17,8 @@ do_install:append:sysworxx () {
     install -m 0644 ${WORKDIR}/etc.mount ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/var.mount ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/userpart-prepare.service ${D}${systemd_system_unitdir}
+
+    install -m 0644 ${WORKDIR}/motd ${D}${sysconfdir}
 }
 
 FILES:${PN}:append:sysworxx = "\
