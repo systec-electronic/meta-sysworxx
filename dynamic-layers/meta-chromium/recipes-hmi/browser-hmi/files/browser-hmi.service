@@ -10,13 +10,14 @@ After=NetworkManager-wait-online.service
 User=root
 Environment=HMI_URL="file:///usr/share/systec-logo/systec_logo.html"
 Environment=HMI_ARG1="--user-data-dir=/home/root/.chromium"
-Environment=HMI_ARG2="--no-sandbox"
-Environment=HMI_ARG3="--kiosk"
-Environment=HMI_ARG4=""
+Environment=HMI_ARG2="--disable-gpu"
+Environment=HMI_ARG3="--no-sandbox"
+Environment=HMI_ARG4="--kiosk"
 Environment=HMI_ARG5=""
+Environment=HMI_ARG6=""
 Environment=XDG_RUNTIME_DIR=/run/user/0
 ExecStartPre=mkdir -p /run/user/0
-ExecStart=cage -- chromium ${HMI_ARG1} ${HMI_ARG2} ${HMI_ARG3} ${HMI_ARG4} ${HMI_ARG5} ${HMI_URL}
+ExecStart=cage -- chromium ${HMI_ARG1} ${HMI_ARG2} ${HMI_ARG3} ${HMI_ARG4} ${HMI_ARG5} ${HMI_ARG6} ${HMI_URL}
 MemoryMax=500M
 Restart=always
 RestartSec=5
