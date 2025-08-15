@@ -146,6 +146,25 @@
 };
 
 /* Temperature Sensors: 0=DDR, 1=A53 (see k3-am62-thermal.dtsi) */
+&main0_thermal {
+	trips {
+		main0_hot: main0-hot {
+			temperature = <85000>;
+			hysteresis = <2000>;
+			type = "passive";
+		};
+	};
+
+	cooling-maps {
+		map0 {
+			trip = <&main0_hot>;
+			cooling-device =
+				<&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
+				<&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
+		};
+	};
+};
+
 &main1_thermal {
 	trips {
 		main1_hot: main1-hot {
