@@ -11,13 +11,13 @@ Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
  2 files changed, 47 insertions(+), 1 deletion(-)
 
 diff --git a/board/ti/am62x/sysworxx.c b/board/ti/am62x/sysworxx.c
-index 017a0a0a2fe..0a8613d8e41 100644
+index c0da5573a8e..ee7de6ecb83 100644
 --- a/board/ti/am62x/sysworxx.c
 +++ b/board/ti/am62x/sysworxx.c
-@@ -113,6 +113,51 @@ void reset_phy(void) {
+@@ -166,6 +166,51 @@ void reset_phy(void) {
  #endif
  
- #if CONFIG_IS_ENABLED(BOARD_LATE_INIT)
+ #ifdef CONFIG_BOARD_LATE_INIT
 +
 +#define K3_PRIMARY_BOOTMODE		0x0
 +#define MAIN_DEVSTAT_BOOTMODE	0x43000030
@@ -66,7 +66,7 @@ index 017a0a0a2fe..0a8613d8e41 100644
  int board_late_init(void)
  {
  	printf("EEPROM import\n");
-@@ -127,6 +172,8 @@ int board_late_init(void)
+@@ -180,6 +225,8 @@ int board_late_init(void)
  		}
  	}
  

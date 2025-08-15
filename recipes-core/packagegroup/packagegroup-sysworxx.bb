@@ -8,25 +8,25 @@ PACKAGES = "\
     packagegroup-sysworxx \
     packagegroup-sysworxx-init \
     packagegroup-sysworxx-base \
-    packagegroup-sysworxx-codesys \
     packagegroup-sysworxx-benchmark \
     packagegroup-sysworxx-extended \
     packagegroup-sysworxx-debug \
     packagegroup-sysworxx-develop \
     packagegroup-sysworxx-graphical \
-    packagegroup-sysworxx-wifi \
+    packagegroup-sysworxx-systec \
+    packagegroup-sysworxx-networking \
 "
 
 RDEPENDS:packagegroup-sysworxx = "\
     packagegroup-sysworxx-init \
     packagegroup-sysworxx-base \
     packagegroup-sysworxx-benchmark \
-    packagegroup-sysworxx-codesys \
     packagegroup-sysworxx-extended \
     packagegroup-sysworxx-debug \
     packagegroup-sysworxx-develop \
     packagegroup-sysworxx-graphical \
-    packagegroup-sysworxx-wifi \
+    packagegroup-sysworxx-systec \
+    packagegroup-sysworxx-networking \
 "
 
 RDEPENDS:packagegroup-sysworxx-init = "\
@@ -38,18 +38,16 @@ RDEPENDS:packagegroup-sysworxx-init = "\
 
 RDEPENDS:packagegroup-sysworxx-base = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'rauc', 'rauc', '', d)} \
-    adc-setup \
     attr \
     bash \
+    bash-completion \
     bzip2 \
-    can-setup \
+    ca-certificates \
     coreutils \
     cpio \
     cpufrequtils \
     curl \
-    di-setup \
     dosfstools \
-    dtbo-setup \
     e2fsprogs \
     e2fsprogs-mke2fs \
     e2fsprogs-resize2fs \
@@ -58,40 +56,40 @@ RDEPENDS:packagegroup-sysworxx-base = "\
     gawk \
     grep \
     gzip \
-    iperf3 \
-    iproute2 \
     kernel-modules \
     less \
     libgpiod \
     libgpiod-tools \
     makedevs \
-    mc \
-    mc-helpers \
-    mc-helpers-perl \
-    nano \
     ncurses \
-    net-tools \
-    openssh-sftp \
-    openssh-sftp-server \
     parted \
-    phy-lan8830t-setup \
     procps \
     psmisc \
-    python3 \
-    python3-pip \
     rng-tools \
-    rs485-setup \
     sed \
     sudo \
-    systec-version \
-    sysworxx-io \
     tar \
     time \
+    tmux \
     tzdata \
-    udev-bootsource \
     usbutils \
     util-linux \
     util-linux-fstrim \
+"
+
+RDEPENDS:packagegroup-sysworxx-systec = "\
+    adc-setup \
+    can-setup \
+    di-setup \
+    dtbo-setup \
+    phy-lan8830t-setup \
+    rs485-setup \
+    systec-version \
+    sysworxx-io \
+    sysworxx-io-codesys-connector \
+    sysworxx-io-js \
+    sysworxx-io-py \
+    udev-bootsource \
     vendor-setup \
 "
 
@@ -103,35 +101,31 @@ RDEPENDS:packagegroup-sysworxx-benchmark = "\
     whetstone \
 "
 
-RDEPENDS:packagegroup-sysworxx-codesys = "\
-    sysworxx-io-codesys-connector \
-"
-
-# python3-distutils is required by python3-docker-compose
-
 RDEPENDS:packagegroup-sysworxx-extended = "\
-    bash-completion \
-    docker-moby \
     docker-compose \
-    python3-distutils-extra \
+    docker-moby \
     htop \
+    mc \
+    mc-helpers \
+    mc-helpers-perl \
     mosquitto \
     mosquitto-clients \
+    nano \
     node-red \
     nodejs \
     nodejs-npm \
     openssl \
+    python3 \
+    python3-as-python \
+    python3-modules \
+    python3-pip \
     vim \
 "
 
 RDEPENDS:packagegroup-sysworxx-graphical = "\
-    kms++ \
     fb-test \
     fbv \
 "
-
-# TODO: we should probably not install the full vim experience, since this
-#       introduces gtk dependencies
 
 RDEPENDS:packagegroup-sysworxx-debug = "\
     can-utils \
@@ -140,24 +134,27 @@ RDEPENDS:packagegroup-sysworxx-debug = "\
     i2c-tools \
     lsof \
     minicom \
+    mmc-utils \
     phytool \
     strace \
     tcpdump \
-    mmc-utils \
 "
 
 RDEPENDS:packagegroup-sysworxx-develop = "\
     sysworxx-io-dev \
 "
 
-RDEPENDS:packagegroup-sysworxx-wifi = "\
-    ca-certificates \
-    iw \
-    kernel-module-lwb-if-backports \
-    lwb5plus-sdio-sa-firmware \
-    summit-networkmanager-lwb-if \
-    summit-supplicant-lwb-if \
-    summit-networkmanager-lwb-if-nmcli \
-    packagegroup-tools-bluetooth \
+RDEPENDS:packagegroup-sysworxx-networking = "\
     bluez5 \
+    iperf3 \
+    iproute2 \
+    iw \
+    linux-firmware-summit-lwb5plus-sdio-sa \
+    net-tools \
+    networkmanager \
+    networkmanager-nmcli \
+    openssh-sftp \
+    openssh-sftp-server \
+    packagegroup-tools-bluetooth \
+    wpa-supplicant \
 "

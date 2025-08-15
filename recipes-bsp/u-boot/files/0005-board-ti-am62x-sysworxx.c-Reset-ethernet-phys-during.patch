@@ -5,76 +5,29 @@ Subject: [PATCH] board/ti/am62x/sysworxx.c: Reset ethernet phys during startup
 
 Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
 ---
- arch/arm/dts/k3-am625-sk.dts         |  7 ++---
- arch/arm/dts/k3-am62x-sk-common.dtsi |  9 +++----
- board/ti/am62x/sysworxx.c            | 38 ++++++++++++++++++++++++++++
- configs/am625_sysworxx_a53.config    |  1 +
- 4 files changed, 45 insertions(+), 10 deletions(-)
+ board/ti/am62x/sysworxx.c                     | 37 +++++++++++++++++++
+ configs/am625_sysworxx_a53.config             |  1 +
+ dts/upstream/src/arm64/ti/k3-am625-sk.dts     |  7 +---
+ .../src/arm64/ti/k3-am62x-sk-common.dtsi      |  9 ++---
+ 4 files changed, 44 insertions(+), 10 deletions(-)
 
-diff --git a/arch/arm/dts/k3-am625-sk.dts b/arch/arm/dts/k3-am625-sk.dts
-index 7f0a58ef761..a23af5316ec 100644
---- a/arch/arm/dts/k3-am625-sk.dts
-+++ b/arch/arm/dts/k3-am625-sk.dts
-@@ -198,11 +198,8 @@
- };
- 
- &cpsw3g_mdio {
--	cpsw3g_phy1: ethernet-phy@1 {
--		reg = <1>;
--		ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
--		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
--		ti,min-output-impedance;
-+	cpsw3g_phy1: ethernet-phy@3 {
-+		reg = <3>;
- 	};
- };
- 
-diff --git a/arch/arm/dts/k3-am62x-sk-common.dtsi b/arch/arm/dts/k3-am62x-sk-common.dtsi
-index c484e7df0d5..84e7bb20e29 100644
---- a/arch/arm/dts/k3-am62x-sk-common.dtsi
-+++ b/arch/arm/dts/k3-am62x-sk-common.dtsi
-@@ -236,6 +236,8 @@
- 		pinctrl-single,pins = <
- 			AM62X_IOPAD(0x160, PIN_OUTPUT, 0) /* (AD24/V17) MDIO0_MDC */
- 			AM62X_IOPAD(0x15c, PIN_INPUT, 0) /* (AB22/U16) MDIO0_MDIO */
-+			AM62X_IOPAD(0x01b4, PIN_OUTPUT_PULLUP, 7) /* (A13) SPI0_CS0.GPIO1_15 */
-+			AM62X_IOPAD(0x01ec, PIN_OUTPUT_PULLUP, 7) /* (A17) I2C1_SDA.GPIO1_29 */
- 		>;
- 	};
- 
-@@ -487,12 +489,9 @@
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&main_mdio1_pins_default>;
- 
--	cpsw3g_phy0: ethernet-phy@0 {
-+	cpsw3g_phy0: ethernet-phy@1 {
- 		bootph-all;
--		reg = <0>;
--		ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
--		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
--		ti,min-output-impedance;
-+		reg = <1>;
- 	};
- };
- 
 diff --git a/board/ti/am62x/sysworxx.c b/board/ti/am62x/sysworxx.c
-index 3d924d6cbcd..04afb73b2ba 100644
+index 86f30c8b9ee..aa754e4722b 100644
 --- a/board/ti/am62x/sysworxx.c
 +++ b/board/ti/am62x/sysworxx.c
-@@ -19,6 +19,8 @@
- #include <asm/io.h>
+@@ -21,6 +21,8 @@
  #include <asm/arch/hardware.h>
  #include <dm/uclass.h>
+ #include <asm/arch/k3-ddr.h>
 +#include <asm/gpio.h>
 +#include <linux/delay.h>
  
- #include "../common/board_detect.h"
  #include "../common/fdt_ops.h"
-@@ -63,6 +65,42 @@ int board_init(void)
+ 
+@@ -87,6 +89,41 @@ int board_init(void)
+ 	return 0;
  }
  
- #if CONFIG_IS_ENABLED(TI_I2C_BOARD_DETECT)
-+
 +#if defined(CONFIG_RESET_PHY_R)
 +void reset_eth_phy(const char* phy_rst_name) {
 +	int ret;
@@ -110,9 +63,9 @@ index 3d924d6cbcd..04afb73b2ba 100644
 +}
 +#endif
 +
- int do_board_detect(void)
+ #ifdef CONFIG_BOARD_LATE_INIT
+ int board_late_init(void)
  {
- 	int ret;
 diff --git a/configs/am625_sysworxx_a53.config b/configs/am625_sysworxx_a53.config
 index a07a69ade7e..6af840a78c5 100644
 --- a/configs/am625_sysworxx_a53.config
@@ -122,6 +75,52 @@ index a07a69ade7e..6af840a78c5 100644
  CONFIG_TARGET_SYSWORXX_AM62X_ADOPT=y
  CONFIG_ENV_SOURCE_FILE="sysworxx"
 +CONFIG_RESET_PHY_R=y
+diff --git a/dts/upstream/src/arm64/ti/k3-am625-sk.dts b/dts/upstream/src/arm64/ti/k3-am625-sk.dts
+index f3534338b41..fd797eb5186 100644
+--- a/dts/upstream/src/arm64/ti/k3-am625-sk.dts
++++ b/dts/upstream/src/arm64/ti/k3-am625-sk.dts
+@@ -178,11 +178,8 @@
+ };
+ 
+ &cpsw3g_mdio {
+-	cpsw3g_phy1: ethernet-phy@1 {
+-		reg = <1>;
+-		ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
+-		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
+-		ti,min-output-impedance;
++	cpsw3g_phy1: ethernet-phy@3 {
++		reg = <3>;
+ 	};
+ };
+ 
+diff --git a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
+index 8e79fc23998..f9cf0edeefd 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
+@@ -281,6 +281,8 @@
+ 		pinctrl-single,pins = <
+ 			AM62X_IOPAD(0x160, PIN_OUTPUT, 0) /* (AD24/V17) MDIO0_MDC */
+ 			AM62X_IOPAD(0x15c, PIN_INPUT, 0) /* (AB22/U16) MDIO0_MDIO */
++			AM62X_IOPAD(0x01b4, PIN_OUTPUT_PULLUP, 7) /* (A13) SPI0_CS0.GPIO1_15 */
++			AM62X_IOPAD(0x01ec, PIN_OUTPUT_PULLUP, 7) /* (A17) I2C1_SDA.GPIO1_29 */
+ 		>;
+ 	};
+ 
+@@ -530,12 +532,9 @@
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&main_mdio1_pins_default>;
+ 
+-	cpsw3g_phy0: ethernet-phy@0 {
++	cpsw3g_phy0: ethernet-phy@1 {
+ 		bootph-all;
+-		reg = <0>;
+-		ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
+-		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
+-		ti,min-output-impedance;
++		reg = <1>;
+ 	};
+ };
+ 
 -- 
 2.50.1
 

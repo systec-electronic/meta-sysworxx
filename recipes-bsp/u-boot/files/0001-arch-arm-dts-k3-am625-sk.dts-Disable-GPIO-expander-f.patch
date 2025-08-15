@@ -6,23 +6,15 @@ Subject: [PATCH] arch/arm/dts/k3-am625-sk.dts: Disable GPIO expander (for SD
 
 Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
 ---
- arch/arm/dts/k3-am625-sk.dts         | 28 ----------------------------
- arch/arm/dts/k3-am62x-sk-common.dtsi |  3 +--
+ dts/upstream/src/arm64/ti/k3-am625-sk.dts     | 27 -------------------
+ .../src/arm64/ti/k3-am62x-sk-common.dtsi      |  4 +--
  2 files changed, 1 insertion(+), 30 deletions(-)
 
-diff --git a/arch/arm/dts/k3-am625-sk.dts b/arch/arm/dts/k3-am625-sk.dts
-index 5ca722aec43..f026acfa3bf 100644
---- a/arch/arm/dts/k3-am625-sk.dts
-+++ b/arch/arm/dts/k3-am625-sk.dts
-@@ -74,7 +74,6 @@
- 		regulator-boot-on;
- 		enable-active-high;
- 		vin-supply = <&vcc_3v3_sys>;
--		gpio = <&exp1 3 GPIO_ACTIVE_HIGH>;
- 	};
- 
- 	vdd_sd_dv: regulator-4 {
-@@ -166,33 +165,6 @@
+diff --git a/dts/upstream/src/arm64/ti/k3-am625-sk.dts b/dts/upstream/src/arm64/ti/k3-am625-sk.dts
+index 6cd74660292..122f21b3399 100644
+--- a/dts/upstream/src/arm64/ti/k3-am625-sk.dts
++++ b/dts/upstream/src/arm64/ti/k3-am625-sk.dts
+@@ -137,33 +137,6 @@
  
  &main_i2c1 {
  	bootph-all;
@@ -55,12 +47,20 @@ index 5ca722aec43..f026acfa3bf 100644
 -	};
  };
  
- &sdhci1 {
-diff --git a/arch/arm/dts/k3-am62x-sk-common.dtsi b/arch/arm/dts/k3-am62x-sk-common.dtsi
-index 59ee4961650..c484e7df0d5 100644
---- a/arch/arm/dts/k3-am62x-sk-common.dtsi
-+++ b/arch/arm/dts/k3-am62x-sk-common.dtsi
-@@ -418,10 +418,9 @@
+ &sdhci0 {
+diff --git a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
+index d64a58593da..8e79fc23998 100644
+--- a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
++++ b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
+@@ -149,7 +149,6 @@
+ 		regulator-boot-on;
+ 		enable-active-high;
+ 		vin-supply = <&vcc_3v3_sys>;
+-		gpio = <&exp1 3 GPIO_ACTIVE_HIGH>;
+ 	};
+ 
+ 	leds {
+@@ -470,10 +469,9 @@
  	sii9022: bridge-hdmi@3b {
  		compatible = "sil,sii9022";
  		reg = <0x3b>;
