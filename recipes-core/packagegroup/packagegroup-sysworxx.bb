@@ -152,10 +152,10 @@ RDEPENDS:packagegroup-sysworxx-networking = "\
     kernel-module-lwb-if-backports \
     lwb5plus-sdio-sa-firmware \
     net-tools \
+    networkmanager \
+    networkmanager-nmcli \
     openssh-sftp \
     openssh-sftp-server \
     packagegroup-tools-bluetooth \
-    summit-networkmanager-lwb-if \
-    summit-networkmanager-lwb-if-nmcli \
-    summit-supplicant-lwb-if \
+    wpa-supplicant \
 "
