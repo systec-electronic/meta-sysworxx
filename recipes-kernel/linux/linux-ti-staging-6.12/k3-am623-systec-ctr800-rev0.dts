@@ -28,6 +28,16 @@
 	};
 };
 
+&mcu_uart0 {
+	status = "disabled";
+	/delete-node/ bluetooth;
+};
+
+&sdhci2 {
+	status = "disabled";
+	/delete-node/ wifi;
+};
+
 // SERIAL0
 &main_uart4 {
 	pinctrl-names = "default";
