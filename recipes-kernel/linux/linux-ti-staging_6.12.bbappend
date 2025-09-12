@@ -13,6 +13,7 @@ SRC_URI += " \
     file://rtc.cfg \
     file://thermal.cfg \
     file://wifi_bt.cfg \
+    file://adc_mcp320x.cfg \
     \
     file://0001-tty-serial-8250-Add-custom-RS232-RS485-mode-switch-v.patch \
     file://0002-tty-serial-8250-Add-quirk-handling-for-some-sysworxx.patch \
@@ -34,9 +35,10 @@ SRC_URI += " \
     file://k3-am625-systec-pi-common.dtsi${MOVE} \
     file://k3-am625-systec-pi-pinmux-0.dtsi${MOVE} \
     file://k3-am625-systec-pi-rev0.dts${MOVE} \
-    file://k3-am625-systec-sysworxx-pi-sysworxx-io-default.dtso${MOVE} \
-    file://k3-am625-systec-sysworxx-pi-hat-smart-metering.dtso${MOVE} \
     file://k3-am625-systec-sysworxx-pi-hat-industrial-communication.dtso${MOVE} \
+    file://k3-am625-systec-sysworxx-pi-hat-io-simulator.dtso${MOVE} \
+    file://k3-am625-systec-sysworxx-pi-hat-smart-metering.dtso${MOVE} \
+    file://k3-am625-systec-sysworxx-pi-sysworxx-io-default.dtso${MOVE} \
 "
 
 FRAGMENTS_DIR := "${THISDIR}/${PN}-6.12"
@@ -50,4 +52,5 @@ KERNEL_CONFIG_FRAGMENTS += " \
     ${FRAGMENTS_DIR}/rtc.cfg \
     ${FRAGMENTS_DIR}/thermal.cfg \
     ${FRAGMENTS_DIR}/wifi_bt.cfg \
+    ${FRAGMENTS_DIR}/adc_mcp320x.cfg \
 "
