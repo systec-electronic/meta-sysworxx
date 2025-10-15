@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: GPL-2.0
+
+/**
+ * Copyright (C) 2025 SYS TEC electronic AG
+ *
+ * Device tree overlay for IO Simulator HAT
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "k3-am625-systec-sysworxx-pi-sysworxx-io-default.dtso"
+
+// Overwrite default SPI1 config with ADC used by the IO HAT
+&main_spi1 {
+	/delete-node/ spidev@0;
+
+	adc@0 {
+		compatible = "microchip,mcp3202";
+		spi-max-frequency = <180000>;
+		reg = <0>;
+	};
+};
