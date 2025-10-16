@@ -149,7 +149,8 @@ RDEPENDS:packagegroup-sysworxx-networking = "\
     iperf3 \
     iproute2 \
     iw \
-    linux-firmware-summit-lwb5plus-sdio-sa \
+    kernel-module-lwb-if-backports \
+    lwb5plus-sdio-sa-firmware \
     net-tools \
     networkmanager \
     networkmanager-nmcli \

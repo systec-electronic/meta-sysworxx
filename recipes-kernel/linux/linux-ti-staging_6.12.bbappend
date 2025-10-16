@@ -5,22 +5,23 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-6.12:${PINMUX_DIR}:"
 MOVE = ";subdir=git/arch/arm64/boot/dts/ti"
 
 SRC_URI += " \
+    file://adc_mcp320x.cfg \
+    file://cfg80211.cfg \
+    file://disable_wifi_bt.cfg \
     file://dynamic_debug.cfg \
+    file://ecdh.cfg \
     file://gpio_aggregator.cfg \
     file://gpio_sysfs.cfg \
     file://led_trigger.cfg \
     file://overlayfs.cfg \
     file://rtc.cfg \
     file://thermal.cfg \
-    file://wifi_bt.cfg \
-    file://adc_mcp320x.cfg \
     \
     file://0001-tty-serial-8250-Add-custom-RS232-RS485-mode-switch-v.patch \
     file://0002-tty-serial-8250-Add-quirk-handling-for-some-sysworxx.patch \
     file://0003-drivers-thermal-k3_j72xx_bandgab.c-add-sysfs-support.patch \
     file://0004-drivers-gpio-gpio-aggregator.c-Add-compatible-gpio-a.patch \
-    file://0005-Port-regdomain-setting-from-summit-backports.patch \
-    file://0006-Revert-PENDING-can-m_can-Support-pinctrl-wakeup-stat.patch \
+    file://0005-Revert-PENDING-can-m_can-Support-pinctrl-wakeup-stat.patch \
     \
     file://k3-am623-systec-ctr600-pinmux-0.dtsi${MOVE} \
     file://k3-am623-systec-ctr800-pinmux-0.dtsi${MOVE} \
@@ -43,7 +44,19 @@ SRC_URI += " \
 
 FRAGMENTS_DIR := "${THISDIR}/${PN}-6.12"
 
+KERNEL_CONFIG_FRAGMENTS_WIFI += " \
+    ${FRAGMENTS_DIR}/disable_wifi_bt.cfg \
+    ${FRAGMENTS_DIR}/cfg80211.cfg \
+    ${FRAGMENTS_DIR}/ecdh.cfg \
+"
+# `disable_wifi_bt.cfg`: Disables all modules which should be provided by Laird
+#                        backports
+# `cfg80211.cfg`:        Module needs to be built to avoid compiler issues
+#                        (`error: 'struct net_device' has no member named 'ieee80211_ptr'`)
+# `ecdh.cfg`:            Hard dependency to support Bluetooth
+
 KERNEL_CONFIG_FRAGMENTS += " \
+    ${FRAGMENTS_DIR}/adc_mcp320x.cfg \
     ${FRAGMENTS_DIR}/dynamic_debug.cfg \
     ${FRAGMENTS_DIR}/gpio_aggregator.cfg \
     ${FRAGMENTS_DIR}/gpio_sysfs.cfg \
@@ -51,6 +64,5 @@ KERNEL_CONFIG_FRAGMENTS += " \
     ${FRAGMENTS_DIR}/overlayfs.cfg \
     ${FRAGMENTS_DIR}/rtc.cfg \
     ${FRAGMENTS_DIR}/thermal.cfg \
-    ${FRAGMENTS_DIR}/wifi_bt.cfg \
-    ${FRAGMENTS_DIR}/adc_mcp320x.cfg \
+    ${KERNEL_CONFIG_FRAGMENTS_WIFI} \
 "
