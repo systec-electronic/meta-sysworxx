@@ -24,6 +24,6 @@ UBOOT_CONFIG_FRAGMENTS:sysworxx = "am625_sysworxx_a53.config"
 # We build for multiple machines: sysworxx and sysworxx-k3r5 and a QA check will
 # error in case the file is deployed twice. Maybe we should move installing
 # fw_env.config to a separate recipe.
-do_deploy:prepend:sysworxx-k3r5() {
+do_deploy:prepend:k3r5() {
     rm -f ${WORKDIR}/fw_env.config
 }
