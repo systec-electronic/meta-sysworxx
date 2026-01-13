@@ -10,7 +10,7 @@ Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
  1 file changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/dts/upstream/src/arm64/ti/k3-am625-sk.dts b/dts/upstream/src/arm64/ti/k3-am625-sk.dts
-index 122f21b3399..f3534338b41 100644
+index c9e8356feb2..91927a9ec25 100644
 --- a/dts/upstream/src/arm64/ti/k3-am625-sk.dts
 +++ b/dts/upstream/src/arm64/ti/k3-am625-sk.dts
 @@ -125,6 +125,12 @@
@@ -40,5 +40,5 @@ index 122f21b3399..f3534338b41 100644
  	cpts@3d000 {
  		/* MAP HW3_TS_PUSH to GENF1 */
 -- 
-2.50.1
+2.52.0
 
