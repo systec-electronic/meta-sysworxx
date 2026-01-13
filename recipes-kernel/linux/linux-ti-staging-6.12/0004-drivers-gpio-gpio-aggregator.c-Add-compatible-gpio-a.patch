@@ -10,10 +10,10 @@ Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
  1 file changed, 4 insertions(+)
 
 diff --git a/drivers/gpio/gpio-aggregator.c b/drivers/gpio/gpio-aggregator.c
-index 38e0fff9afe7..8a7c5218bfba 100644
+index cc6ee4334602..f23cb9af7f7d 100644
 --- a/drivers/gpio/gpio-aggregator.c
 +++ b/drivers/gpio/gpio-aggregator.c
-@@ -605,6 +605,10 @@ static const struct of_device_id gpio_aggregator_dt_ids[] = {
+@@ -619,6 +619,10 @@ static const struct of_device_id gpio_aggregator_dt_ids[] = {
  	 * Add GPIO-operated devices controlled from userspace below,
  	 * or use "driver_override" in sysfs.
  	 */
@@ -25,5 +25,5 @@ index 38e0fff9afe7..8a7c5218bfba 100644
  };
  MODULE_DEVICE_TABLE(of, gpio_aggregator_dt_ids);
 -- 
-2.49.0
+2.52.0
 

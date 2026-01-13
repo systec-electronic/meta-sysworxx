@@ -10,7 +10,7 @@ This reverts commit c85877d40f8e70e1e201eca2ae1648781f238a37.
  1 file changed, 21 deletions(-)
 
 diff --git a/drivers/net/can/m_can/m_can.c b/drivers/net/can/m_can/m_can.c
-index ed8a3e759e1a..9c4e954c5096 100644
+index c2b1da87a9ee..612c92cae1e8 100644
 --- a/drivers/net/can/m_can/m_can.c
 +++ b/drivers/net/can/m_can/m_can.c
 @@ -23,7 +23,6 @@
@@ -21,7 +21,7 @@ index ed8a3e759e1a..9c4e954c5096 100644
  
  #include "m_can.h"
  
-@@ -2431,21 +2430,6 @@ static int m_can_class_setup_optional_pinctrl(struct m_can_classdev *class_dev)
+@@ -2449,21 +2448,6 @@ static int m_can_class_setup_optional_pinctrl(struct m_can_classdev *class_dev)
  	return 0;
  }
  
@@ -43,7 +43,7 @@ index ed8a3e759e1a..9c4e954c5096 100644
  struct m_can_classdev *m_can_class_allocate_dev(struct device *dev,
  						int sizeof_priv)
  {
-@@ -2488,11 +2472,6 @@ struct m_can_classdev *m_can_class_allocate_dev(struct device *dev,
+@@ -2506,11 +2490,6 @@ struct m_can_classdev *m_can_class_allocate_dev(struct device *dev,
  
  	m_can_of_parse_mram(class_dev, mram_config_vals);
  
@@ -56,5 +56,5 @@ index ed8a3e759e1a..9c4e954c5096 100644
  	if (ret)
  		goto err_free_candev;
 -- 
-2.49.0
+2.52.0
 
