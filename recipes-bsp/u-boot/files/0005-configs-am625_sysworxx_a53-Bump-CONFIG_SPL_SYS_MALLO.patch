@@ -1,0 +1,30 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Andreas Dinter <andreas.dinter@systec-electronic.com>
+Date: Thu, 15 Jan 2026 11:25:46 +0100
+Subject: [PATCH] configs/am625_sysworxx_a53: Bump CONFIG_SPL_SYS_MALLOC_F_LEN
+
+This is needed to avoid panic in R5 SPL (inside `alloc_simple()`):
+
+    alloc space exhausted
+    DRAM init failed: -12
+
+This was not needed in earlier versions of U-Boot but now we need 0x7030
+bytes.
+
+Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
+---
+ configs/am625_sysworxx_a53.config | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/am625_sysworxx_a53.config b/configs/am625_sysworxx_a53.config
+index a07a69ade7e..f6542b8fdb8 100644
+--- a/configs/am625_sysworxx_a53.config
++++ b/configs/am625_sysworxx_a53.config
+@@ -2,3 +2,4 @@
+ 
+ CONFIG_TARGET_SYSWORXX_AM62X_ADOPT=y
+ CONFIG_ENV_SOURCE_FILE="sysworxx"
++CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
+-- 
+2.52.0
+
