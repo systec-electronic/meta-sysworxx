@@ -89,16 +89,16 @@ index dba5a1ece05..7698b0e1f1f 100644
  
  #if defined(CONFIG_OF_BOARD_SETUP)
 diff --git a/board/ti/common/Makefile b/board/ti/common/Makefile
-index caf6b9fa8c1..ae50ab7bca1 100644
+index f58935b4103..22e7b311e12 100644
 --- a/board/ti/common/Makefile
 +++ b/board/ti/common/Makefile
 @@ -4,4 +4,6 @@
  obj-${CONFIG_TI_I2C_BOARD_DETECT} += board_detect.o
- obj-${CONFIG_CMD_EXTENSION} += cape_detect.o
+ obj-${CONFIG_$(PHASE_)SUPPORT_EXTENSION_SCAN} += cape_detect.o
  obj-${CONFIG_OF_LIBFDT} += fdt_ops.o
 +ifndef CONFIG_TARGET_SYSWORXX_AM62X_ADOPT
  obj-${CONFIG_ARCH_K3} += k3-ddr.o
 +endif
 -- 
-2.50.1
+2.52.0
 

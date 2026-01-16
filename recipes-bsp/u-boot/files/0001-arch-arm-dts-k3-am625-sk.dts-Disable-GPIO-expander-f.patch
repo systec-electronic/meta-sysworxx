@@ -11,7 +11,7 @@ Signed-off-by: Andreas Dinter <andreas.dinter@systec-electronic.com>
  2 files changed, 1 insertion(+), 30 deletions(-)
 
 diff --git a/dts/upstream/src/arm64/ti/k3-am625-sk.dts b/dts/upstream/src/arm64/ti/k3-am625-sk.dts
-index 6cd74660292..122f21b3399 100644
+index b1161e688bf..c9e8356feb2 100644
 --- a/dts/upstream/src/arm64/ti/k3-am625-sk.dts
 +++ b/dts/upstream/src/arm64/ti/k3-am625-sk.dts
 @@ -137,33 +137,6 @@
@@ -49,7 +49,7 @@ index 6cd74660292..122f21b3399 100644
  
  &sdhci0 {
 diff --git a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
-index d64a58593da..8e79fc23998 100644
+index 6c1ab25514e..f1dcbf5f0b1 100644
 --- a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
 +++ b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
 @@ -149,7 +149,6 @@
@@ -60,7 +60,7 @@ index d64a58593da..8e79fc23998 100644
  	};
  
  	leds {
-@@ -470,10 +469,9 @@
+@@ -483,10 +482,9 @@
  	sii9022: bridge-hdmi@3b {
  		compatible = "sil,sii9022";
  		reg = <0x3b>;
@@ -73,5 +73,5 @@ index d64a58593da..8e79fc23998 100644
  		ports {
  			#address-cells = <1>;
 -- 
-2.50.1
+2.52.0
 

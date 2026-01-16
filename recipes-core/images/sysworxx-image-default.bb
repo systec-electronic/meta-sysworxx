@@ -11,7 +11,7 @@ IMAGE_INSTALL = "\
     ${CORE_IMAGE_EXTRA_INSTALL} \
     "
 
-IMAGE_FSTYPES = "ext4 tar.gz wic.xz"
+IMAGE_FSTYPES = "ext4 tar.gz wic wic.bmap wic.xz"
 
 inherit core-image extrausers
 

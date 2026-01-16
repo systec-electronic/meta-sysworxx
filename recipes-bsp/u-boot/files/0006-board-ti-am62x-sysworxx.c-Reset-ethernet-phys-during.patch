@@ -67,16 +67,16 @@ index 86f30c8b9ee..aa754e4722b 100644
  int board_late_init(void)
  {
 diff --git a/configs/am625_sysworxx_a53.config b/configs/am625_sysworxx_a53.config
-index a07a69ade7e..6af840a78c5 100644
+index f6542b8fdb8..df0957afb24 100644
 --- a/configs/am625_sysworxx_a53.config
 +++ b/configs/am625_sysworxx_a53.config
-@@ -2,3 +2,4 @@
- 
+@@ -3,3 +3,4 @@
  CONFIG_TARGET_SYSWORXX_AM62X_ADOPT=y
  CONFIG_ENV_SOURCE_FILE="sysworxx"
+ CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
 +CONFIG_RESET_PHY_R=y
 diff --git a/dts/upstream/src/arm64/ti/k3-am625-sk.dts b/dts/upstream/src/arm64/ti/k3-am625-sk.dts
-index f3534338b41..fd797eb5186 100644
+index 91927a9ec25..4eaacdf5cd8 100644
 --- a/dts/upstream/src/arm64/ti/k3-am625-sk.dts
 +++ b/dts/upstream/src/arm64/ti/k3-am625-sk.dts
 @@ -178,11 +178,8 @@
@@ -94,10 +94,10 @@ index f3534338b41..fd797eb5186 100644
  };
  
 diff --git a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
-index 8e79fc23998..f9cf0edeefd 100644
+index f1dcbf5f0b1..72fadc6b4dc 100644
 --- a/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
 +++ b/dts/upstream/src/arm64/ti/k3-am62x-sk-common.dtsi
-@@ -281,6 +281,8 @@
+@@ -293,6 +293,8 @@
  		pinctrl-single,pins = <
  			AM62X_IOPAD(0x160, PIN_OUTPUT, 0) /* (AD24/V17) MDIO0_MDC */
  			AM62X_IOPAD(0x15c, PIN_INPUT, 0) /* (AB22/U16) MDIO0_MDIO */
@@ -106,7 +106,7 @@ index 8e79fc23998..f9cf0edeefd 100644
  		>;
  	};
  
-@@ -530,12 +532,9 @@
+@@ -543,12 +545,9 @@
  	pinctrl-names = "default";
  	pinctrl-0 = <&main_mdio1_pins_default>;
  
@@ -122,5 +122,5 @@ index 8e79fc23998..f9cf0edeefd 100644
  };
  
 -- 
-2.50.1
+2.52.0
 

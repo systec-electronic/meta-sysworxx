@@ -11,10 +11,10 @@ Signed-off-by: Christian Schuster <christian.schuster@systec-electronic.com>
  1 file changed, 65 insertions(+)
 
 diff --git a/drivers/tty/serial/8250/8250_omap.c b/drivers/tty/serial/8250/8250_omap.c
-index 28f913bb72c5..7552ab7db0ae 100644
+index b06c27929275..d7c6d503443b 100644
 --- a/drivers/tty/serial/8250/8250_omap.c
 +++ b/drivers/tty/serial/8250/8250_omap.c
-@@ -115,6 +115,10 @@
+@@ -117,6 +117,10 @@
  /* RX FIFO occupancy indicator */
  #define UART_OMAP_RX_LVL		0x19
  
@@ -25,7 +25,7 @@ index 28f913bb72c5..7552ab7db0ae 100644
  /* Timeout low and High */
  #define UART_OMAP_TO_L                 0x26
  #define UART_OMAP_TO_H                 0x27
-@@ -1392,6 +1396,62 @@ static int omap8250_em485_config(struct uart_port *port,
+@@ -1404,6 +1408,62 @@ static int omap8250_em485_config(struct uart_port *port,
  	return ret;
  }
  
@@ -88,7 +88,7 @@ index 28f913bb72c5..7552ab7db0ae 100644
  static void ti_sermode_worker(struct work_struct *work)
  {
  	struct omap8250_priv *priv = container_of(work, struct omap8250_priv, sermode_worker);
-@@ -1542,6 +1602,11 @@ static int omap8250_probe(struct platform_device *pdev)
+@@ -1554,6 +1614,11 @@ static int omap8250_probe(struct platform_device *pdev)
  			 DEFAULT_CLK_SPEED);
  	}
  
@@ -101,5 +101,5 @@ index 28f913bb72c5..7552ab7db0ae 100644
  	priv->line = -ENODEV;
  	priv->latency = PM_QOS_CPU_LATENCY_DEFAULT_VALUE;
 -- 
-2.49.0
+2.52.0
 
